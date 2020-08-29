@@ -1,1 +1,2 @@
-Trying to make Rock, Paper Scissors game.
+Completed Rock, Paper Scissors game.
+Check out the comments properly.
