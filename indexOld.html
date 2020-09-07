@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock Paper Scissor</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <script>
+        
+        let computerScore = 0;
+        let playerScore = 0;
+        /*Both computerSelection and playerSelection should be declared globally but should be empty so
+        that we won't get any function scope errors. The value will be assigned to them in game().*/
+        let computerSelection = "";//You can't put 0 here because it stores a string value.
+        //The program requires the user to enter their word in every round so we will do that in game(). 
+        let playerSelection = "";////You can't put 0 here because it stores a string value.
+        
+        //function for generating random word for computer
+        function computerPlay() {
+            switch (Math.floor(Math.random() * 3)) {
+                case 0:
+                    return "rock";
+                    break;
+                case 1:
+                    return "paper";
+                    break;
+                case 2:
+                    return "scissor";
+                    break;
+            }
+        }
+        
+        //converting playerSelection and computerSelection to 1st letter capital and rest letter small for displaying Paper beats Rock! format. This is optional.
+        function convertPlayerSelection(playerSelection) {
+            firstLetter = playerSelection.slice(0, 1);
+            remainingLetter = playerSelection.slice(1);
+            return firstLetter.toUpperCase() + remainingLetter.toLowerCase(); //using toLowerCase function in case of user entering rest of the letters in random Case.
+        }
+
+        function convertComputerSelection(computerSelection) {
+            firstLetter = computerSelection.slice(0, 1);
+            remainingLetter = computerSelection.slice(1);
+            return firstLetter.toUpperCase() + remainingLetter; //no need to convert to lower case here because computer generates the word in lowercase.
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            let playerMove = playerSelection.toLowerCase(); //converting user's input into lowercase to make comparison easier.
+            if (playerMove == "rock" && computerSelection == "paper") {
+                computerScore= computerScore + 1;
+                console.log ("Computer picked " + properComputerSelection + "." + " You Lose! " + properComputerSelection + " beats " + properPlayerSelection + "!"); //properComputerSelection and properPlayerSelection have the value of 1st letter uppercase and remaining lowercase words of computer and player respectively.
+                return ("Your Score: "+ playerScore + " Computer Score: "+computerScore);
+            }
+            else if (playerMove == "paper" && computerSelection == "scissor") {
+                computerScore= computerScore + 1;
+                console.log ("Computer picked " + properComputerSelection + "." + " You Lose! " + properComputerSelection + " beats " + properPlayerSelection + "!");    
+                return ("Your Score: "+ playerScore + " Computer Score: "+computerScore);
+            }
+            else if (playerMove == "scissor" && computerSelection == "rock") {
+                computerScore= computerScore + 1; 
+                console.log ("Computer picked " + properComputerSelection + "." + " You Lose! " + properComputerSelection + " beats " + properPlayerSelection + "!");    
+                return ("Your Score: "+ playerScore + " Computer Score: "+computerScore);
+            }
+            else if (playerMove == computerSelection) {
+                console.log ("Computer picked " + properComputerSelection + "." + " It's a draw");
+                return console.log("Your Score: "+ playerScore + " Computer Score: "+computerScore);
+            }
+            else {
+                playerScore= playerScore + 1;
+                console.log ("Computer picked " + properComputerSelection + "." + " You win! " + properPlayerSelection + " beats " + properComputerSelection + "!");
+                return("Your Score: "+ playerScore + " Computer Score: "+computerScore);
+            }
+        }
+
+        function checkWinner() {
+            if (playerScore > computerScore) {
+                return "You are the final winner.";
+            }
+            else if (computerScore > playerScore) {
+                return "Computer is the final winner.";
+            }
+            else {
+                return "Since the final score of both players are same, the game ended as draw."
+            }
+        }
+
+        function game() {
+            let round = 1;
+            while (round <= 5) {
+                playerSelection = prompt("Enter Rock, Paper or Scissor",'Rock');
+                computerSelection = computerPlay();
+                //properPlayerSelection and properComputerSelection is declared here as they are needed in playrRound().
+                properPlayerSelection = convertPlayerSelection(playerSelection);
+                properComputerSelection = convertComputerSelection(computerSelection);
+                console.log("Round " +round);
+                console.log(playRound(playerSelection, computerSelection));
+                round++;
+            }
+        }
+
+        console.log(game());
+        console.log(checkWinner());
+
+    </script>
+</body>
+
+</html>
